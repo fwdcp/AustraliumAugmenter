@@ -1,0 +1,56 @@
+//-----------------------------------------------------------------------------
+//	australiumaugmenter.vpc
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$Macro PROJECTDIR	"."
+$Macro OUTBINDIR	".\addons"
+$Macro SRCDIR		"..\.."									[!$TRAVIS]
+$Macro SRCDIR		"..\source-sdk-2013\mp\src"				[$TRAVIS]
+
+$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+
+$Configuration
+{
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public"
+		$PreprocessorDefinitions		"$BASE;australiumaugmenterONLY;_MBCS;CLIENT_DLL;VERSION_SAFE_STEAM_API_INTERFACES"
+		$TreatWarningsAsErrors			"No (/WX-)"
+		$EnableC++Exceptions			"Yes (/EHsc)"
+		$GCC_ExtraCompilerFlags			"-std=c++0x"
+	}
+
+	$Linker
+	{
+		$AdditionalDependencies			"$BASE odbc32.lib odbccp32.lib"
+	}
+}
+
+$Project "AustraliumAugmenter"
+{
+	$Folder	"Source Files"
+	{
+		$File	"src\australiumaugmenter.cpp"
+		$File	"src\ifaces.cpp"
+	}
+
+	$Folder	"Header Files"
+	{
+		$File	"src\australiumaugmenter.h"
+		$File	"src\common.h"
+		$File	"src\exceptions.h"
+		$File	"src\ifaces.h"
+		$File	"src\modules.h"
+	}
+
+	$Folder	"Link Libraries"
+	{
+		$ImpLib	steam_api
+		$Lib	tier1
+		$Lib	tier2
+		$Lib	tier3
+		$Lib	vgui_controls
+	}
+}

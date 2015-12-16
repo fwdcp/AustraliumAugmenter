@@ -1,0 +1,4 @@
+$Project "AustraliumAugmenter"
+{
+	"utils\AustraliumAugmenter\australiumaugmenter.vpc" [$WIN32||$POSIX]
+}
