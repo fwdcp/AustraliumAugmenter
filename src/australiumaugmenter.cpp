@@ -16,6 +16,8 @@
 #include "ifaces.h"
 #include "modules.h"
 
+#include "modules/sessioninfo.h"
+
 ModuleManager *g_ModuleManager = nullptr;
 
 // The plugin is a static singleton that is exported as an interface
@@ -35,6 +37,8 @@ bool AustraliumAugmenterPlugin::Load(CreateInterfaceFn interfaceFactory, CreateI
 	Interfaces::Load(interfaceFactory, gameServerFactory);
 
 	g_ModuleManager = new ModuleManager();
+
+	g_ModuleManager->RegisterAndLoadModule<SessionInfo>("Session Info");
 
 	ConVar_Register();
 

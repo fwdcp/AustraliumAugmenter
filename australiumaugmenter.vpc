@@ -34,6 +34,7 @@ $Project "AustraliumAugmenter"
 	{
 		$File	"src\australiumaugmenter.cpp"
 		$File	"src\ifaces.cpp"
+		$File	"src\modules\sessioninfo.cpp"
 	}
 
 	$Folder	"Header Files"
@@ -43,6 +44,7 @@ $Project "AustraliumAugmenter"
 		$File	"src\exceptions.h"
 		$File	"src\ifaces.h"
 		$File	"src\modules.h"
+		$File	"src\modules\sessioninfo.h"
 	}
 
 	$Folder	"Link Libraries"
