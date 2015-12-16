@@ -4,13 +4,17 @@
 //	Project Script
 //-----------------------------------------------------------------------------
 
-$Macro PROJECTDIR	"."
-$Macro OUTBINDIR	".\addons"
-$Macro SRCDIR		"..\.."									[!$TRAVIS]
-$Macro SRCDIR		"..\source-sdk-2013\mp\src"				[$TRAVIS]
-$Macro MMSOURCE_DEV	"..\..\..\..\..\metamod-source"
+$Macro PROJECTDIR			"."
+$Macro OUTBINDIR			".\addons"
+$Macro SRCDIR				"..\.."									[!$TRAVIS]
+$Macro SRCDIR				"..\source-sdk-2013\mp\src"				[$TRAVIS]
+$Macro MMSOURCE_DEV			"..\..\..\..\..\metamod-source"
+$Macro GENERATED_PROTO_DIR	"src\generated_proto"
+$Macro PROTOBUF_LITE 0
 
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+$Include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
+$Include "$SRCDIR\game\protobuf_include.vpc"
 
 $Configuration
 {
@@ -54,6 +58,22 @@ $Project "AustraliumAugmenter"
 		$File	"src\ifaces.h"
 		$File	"src\modules.h"
 		$File	"src\modules\sessioninfo.h"
+	}
+
+	$Folder "Protobuf Files"
+	{
+		$File			"src\proto\base_gcmessages.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\base_gcmessages.pb.cc"
+		$File			"src\proto\econ_gcmessages.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\econ_gcmessages.pb.cc"
+		$File			"src\proto\gcsdk_gcmessages.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\gcsdk_gcmessages.pb.cc"
+		$File			"src\proto\gcsystemmsgs.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\gcsystemmsgs.pb.cc"
+		$File			"src\proto\steammessages.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\steammessages.pb.cc"
+		$File			"src\proto\tf_gcmessages.proto"
+		$DynamicFile 	"$GENERATED_PROTO_DIR\tf_gcmessages.pb.cc"
 	}
 
 	$Folder	"Link Libraries"
