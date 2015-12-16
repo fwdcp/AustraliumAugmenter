@@ -8,6 +8,7 @@ $Macro PROJECTDIR	"."
 $Macro OUTBINDIR	".\addons"
 $Macro SRCDIR		"..\.."									[!$TRAVIS]
 $Macro SRCDIR		"..\source-sdk-2013\mp\src"				[$TRAVIS]
+$Macro MMSOURCE_DEV	"..\..\..\..\..\metamod-source"
 
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
@@ -15,7 +16,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public;$MMSOURCE_DEV\core\sourcehook"
 		$PreprocessorDefinitions		"$BASE;australiumaugmenterONLY;_MBCS;CLIENT_DLL;VERSION_SAFE_STEAM_API_INTERFACES"
 		$TreatWarningsAsErrors			"No (/WX-)"
 		$EnableC++Exceptions			"Yes (/EHsc)"
@@ -33,8 +34,15 @@ $Project "AustraliumAugmenter"
 	$Folder	"Source Files"
 	{
 		$File	"src\australiumaugmenter.cpp"
+		$File	"src\funcs.cpp"
 		$File	"src\ifaces.cpp"
 		$File	"src\modules\sessioninfo.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_hookmangen.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_chookidman.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_chookmaninfo.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_cproto.cpp"
+		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_cvfnptr.cpp"
 	}
 
 	$Folder	"Header Files"
@@ -42,6 +50,7 @@ $Project "AustraliumAugmenter"
 		$File	"src\australiumaugmenter.h"
 		$File	"src\common.h"
 		$File	"src\exceptions.h"
+		$File	"src\funcs.h"
 		$File	"src\ifaces.h"
 		$File	"src\modules.h"
 		$File	"src\modules\sessioninfo.h"
