@@ -12,11 +12,13 @@
 
 #include "tier3/tier3.h"
 #include "steam/steam_api.h"
+#include "steam/isteamgamecoordinator.h"
 
 #include "common.h"
 #include "exceptions.h"
 
 CSteamAPIContext *Interfaces::pSteamAPIContext = nullptr;
+ISteamGameCoordinator *Interfaces::pSteamGameCoordinator = nullptr;
 
 bool Interfaces::steamLibrariesAvailable = false;
 
@@ -27,6 +29,10 @@ void Interfaces::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn game
 
 	pSteamAPIContext = new CSteamAPIContext();
 	steamLibrariesAvailable = SteamAPI_InitSafe() && pSteamAPIContext->Init();
+
+	if (steamLibrariesAvailable) {
+		pSteamGameCoordinator = (ISteamGameCoordinator *) SteamClient()->GetISteamGenericInterface(SteamAPI_GetHSteamUser(), SteamAPI_GetHSteamPipe(), STEAMGAMECOORDINATOR_INTERFACE_VERSION);
+	}
 }
 
 void Interfaces::Unload() {

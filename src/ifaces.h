@@ -13,6 +13,7 @@
 #include "interface.h"
 
 class CSteamAPIContext;
+class ISteamGameCoordinator;
 
 class Interfaces {
 	public:
@@ -20,6 +21,7 @@ class Interfaces {
 		static void Unload();
 
 		static CSteamAPIContext *pSteamAPIContext;
+		static ISteamGameCoordinator *pSteamGameCoordinator;
 
 		static bool steamLibrariesAvailable;
 };
