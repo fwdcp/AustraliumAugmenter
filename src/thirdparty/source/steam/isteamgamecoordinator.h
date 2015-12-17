@@ -1,4 +1,4 @@
-//====== Copyright ©, Valve Corporation, All rights reserved. =======
+//====== Copyright ï¿½, Valve Corporation, All rights reserved. =======
 //
 // Purpose: interface to the game coordinator for this application
 //
@@ -10,8 +10,8 @@
 #pragma once
 #endif
 
-#include "steamtypes.h"
-#include "steamclientpublic.h"
+#include "steam/steamtypes.h"
+#include "steam/steamclientpublic.h"
 
 
 // list of possible return values from the ISteamGameCoordinator API
@@ -37,13 +37,13 @@ public:
 	virtual EGCResults SendMessage( uint32 unMsgType, const void *pubData, uint32 cubData ) = 0;
 
 	// returns true if there is a message waiting from the game coordinator
-	virtual bool IsMessageAvailable( uint32 *pcubMsgSize ) = 0; 
+	virtual bool IsMessageAvailable( uint32 *pcubMsgSize ) = 0;
 
-	// fills the provided buffer with the first message in the queue and returns k_EGCResultOK or 
+	// fills the provided buffer with the first message in the queue and returns k_EGCResultOK or
 	// returns k_EGCResultNoMessage if there is no message waiting. pcubMsgSize is filled with the message size.
 	// If the provided buffer is not large enough to fit the entire message, k_EGCResultBufferTooSmall is returned
 	// and the message remains at the head of the queue.
-	virtual EGCResults RetrieveMessage( uint32 *punMsgType, void *pubDest, uint32 cubDest, uint32 *pcubMsgSize ) = 0; 
+	virtual EGCResults RetrieveMessage( uint32 *punMsgType, void *pubDest, uint32 cubDest, uint32 *pcubMsgSize ) = 0;
 
 };
 #define STEAMGAMECOORDINATOR_INTERFACE_VERSION "SteamGameCoordinator001"
