@@ -27,6 +27,12 @@ SourceHook::Impl::CSourceHookImpl g_SourceHook;
 SourceHook::ISourceHook *g_SHPtr = &g_SourceHook;
 int g_PLID = 0;
 
+SH_DECL_HOOK3(ISteamGameCoordinator, SendMessage, SH_NOATTRIB, 0, EGCResults, uint32, const void *, uint32);
+
+int Funcs::AddHook_ISteamGameCoordinator_SendMessage(ISteamGameCoordinator *instance, fastdelegate::FastDelegate3<uint32, const void *, uint32, EGCResults> hook, bool post) {
+	return SH_ADD_HOOK(ISteamGameCoordinator, SendMessage, instance, hook, post);
+}
+
 void Funcs::Unload() {
 	g_SourceHook.UnloadPlugin(g_PLID, new AustraliumAugmenterUnloader());
 }

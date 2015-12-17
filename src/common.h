@@ -20,3 +20,5 @@
 
 #define PLUGIN_VERSION "0.0.0"
 #define PRINT_TAG() ConColorMsg(Color(0, 153, 153, 255), "[AustraliumAugmenter] ")
+
+#undef SendMessage

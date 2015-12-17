@@ -12,7 +12,7 @@
 
 #include "steam/steamtypes.h"
 #include "steam/steamclientpublic.h"
-
+#include "steam/isteamclient.h"
 
 // list of possible return values from the ISteamGameCoordinator API
 enum EGCResults
