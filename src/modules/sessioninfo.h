@@ -12,9 +12,13 @@
 
 #include "../modules.h"
 
+#include "steam/isteamgamecoordinator.h"
+
 class SessionInfo : public Module {
 public:
 	SessionInfo();
 
 	static bool CheckDependencies();
+private:
+	EGCResults GCSendMessageOverride(uint32 unMsgType, const void *pubData, uint32 cubData);
 };

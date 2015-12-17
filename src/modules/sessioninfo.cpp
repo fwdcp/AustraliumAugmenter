@@ -10,14 +10,16 @@
 
 #include "sessioninfo.h"
 
+#include <inttypes.h>
+
 #include "steam/steam_api.h"
-#include "steam/isteamgamecoordinator.h"
 
 #include "../common.h"
+#include "../funcs.h"
 #include "../ifaces.h"
 
 SessionInfo::SessionInfo() {
-
+	Funcs::AddHook_ISteamGameCoordinator_SendMessage(Interfaces::pSteamGameCoordinator, SH_MEMBER(this, &SessionInfo::GCSendMessageOverride), false);
 }
 
 bool SessionInfo::CheckDependencies() {
@@ -38,4 +40,11 @@ bool SessionInfo::CheckDependencies() {
 	}
 
 	return ready;
+}
+
+EGCResults SessionInfo::GCSendMessageOverride(uint32 unMsgType, const void *pubData, uint32 cubData) {
+	PRINT_TAG();
+	Msg("Sending message %"PRIu32"\n", unMsgType & ~0x80000000);
+
+	RETURN_META_VALUE(MRES_IGNORED, k_EGCResultOK);
 }
