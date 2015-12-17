@@ -8,7 +8,7 @@ $Macro PROJECTDIR			"."
 $Macro OUTBINDIR			".\addons"
 $Macro SRCDIR				"..\.."									[!$TRAVIS]
 $Macro SRCDIR				"..\source-sdk-2013\mp\src"				[$TRAVIS]
-$Macro MMSOURCE_DEV			"..\..\..\..\..\metamod-source"
+$Macro SOURCEHOOKDIR		"src\thirdparty\sourcehook"
 $Macro GENERATED_PROTO_DIR	"src\generated_proto"
 $Macro PROTOBUF_LITE 0
 
@@ -20,7 +20,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public;$MMSOURCE_DEV\core\sourcehook"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public;$SOURCEHOOKDIR"
 		$PreprocessorDefinitions		"$BASE;australiumaugmenterONLY;_MBCS;CLIENT_DLL;VERSION_SAFE_STEAM_API_INTERFACES"
 		$TreatWarningsAsErrors			"No (/WX-)"
 		$EnableC++Exceptions			"Yes (/EHsc)"
@@ -41,12 +41,6 @@ $Project "AustraliumAugmenter"
 		$File	"src\funcs.cpp"
 		$File	"src\ifaces.cpp"
 		$File	"src\modules\sessioninfo.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_hookmangen.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_chookidman.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_chookmaninfo.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_cproto.cpp"
-		$File	"$MMSOURCE_DEV\core\sourcehook\sourcehook_impl_cvfnptr.cpp"
 	}
 
 	$Folder	"Header Files"
@@ -74,6 +68,16 @@ $Project "AustraliumAugmenter"
 		$DynamicFile 	"$GENERATED_PROTO_DIR\steammessages.pb.cc"
 		$File			"src\proto\tf_gcmessages.proto"
 		$DynamicFile 	"$GENERATED_PROTO_DIR\tf_gcmessages.pb.cc"
+	}
+
+	$Folder "SourceHook Files"
+	{
+		$File	"$SOURCEHOOKDIR\sourcehook.cpp"
+		$File	"$SOURCEHOOKDIR\sourcehook_hookmangen.cpp"
+		$File	"$SOURCEHOOKDIR\sourcehook_impl_chookidman.cpp"
+		$File	"$SOURCEHOOKDIR\sourcehook_impl_chookmaninfo.cpp"
+		$File	"$SOURCEHOOKDIR\sourcehook_impl_cproto.cpp"
+		$File	"$SOURCEHOOKDIR\sourcehook_impl_cvfnptr.cpp"
 	}
 
 	$Folder	"Link Libraries"
