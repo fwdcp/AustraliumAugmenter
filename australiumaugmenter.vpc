@@ -8,6 +8,7 @@ $Macro PROJECTDIR			"."
 $Macro OUTBINDIR			".\addons"
 $Macro SRCDIR				"..\.."									[!$TRAVIS]
 $Macro SRCDIR				"..\source-sdk-2013\mp\src"				[$TRAVIS]
+$Macro SOURCEDIR			"src\thirdparty\source"
 $Macro SOURCEHOOKDIR		"src\thirdparty\sourcehook"
 $Macro GENERATED_PROTO_DIR	"src\generated_proto"
 $Macro PROTOBUF_LITE 0
@@ -20,7 +21,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public;$SOURCEHOOKDIR"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\client;$SRCDIR\game\shared;$SRCDIR\public;$SOURCEDIR;$SOURCEHOOKDIR"
 		$PreprocessorDefinitions		"$BASE;australiumaugmenterONLY;_MBCS;CLIENT_DLL;VERSION_SAFE_STEAM_API_INTERFACES"
 		$TreatWarningsAsErrors			"No (/WX-)"
 		$EnableC++Exceptions			"Yes (/EHsc)"
